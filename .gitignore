@@ -2,8 +2,8 @@
 
 # Custom
 /html5up-ethereal
-/public/images
-/public/music
+#/public/images
+#/public/music
 
 # Logs
 logs
