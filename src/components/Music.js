@@ -25,26 +25,6 @@ class Music extends Component {
         }
     }
 
-    handleAudioEnded = () => {
-        let newStateList = []
-        this.setState(function (prevState) {
-            newStateList = prevState.list.map((item) => {
-                return ({
-                    "key": item.key,
-                    "iconClass": "button primary color2 circle icon solid fa-play-circle",
-                    "songTitle": item.songTitle,
-                    "songDesc": item.songDesc,
-                    "songLink": item.songLink,
-                    "originalLink": item.originalLink
-                })
-            })
-        })
-        return {
-            list: newStateList,
-            prevClickedKey: null
-        }
-    }
-
     // Using arrow function to define handlePlayClick means we don't have to explicitly bind
     // by doing this.handlePlayClick = this.handlePlayClick.bind(this)
     handlePlayClick = (index) => {
@@ -59,33 +39,23 @@ class Music extends Component {
                     audioSrc = item.songLink
                     if (!isPlaying) {
                         return ({
-                            "key": item.key,
+                            // Return all properties of item using spread(...) operator (ES6 syntax)
+                            ...item,
+                            // Override icon class property
                             "iconClass": "button color2 circle icon solid fa-pause-circle",
-                            "songTitle": item.songTitle,
-                            "songDesc": item.songDesc,
-                            "songLink": item.songLink,
-                            "originalLink": item.originalLink
                         })
                     }
                     else {
                         return ({
-                            "key": item.key,
+                            ...item,
                             "iconClass": "button primary color2 circle icon solid fa-play-circle",
-                            "songTitle": item.songTitle,
-                            "songDesc": item.songDesc,
-                            "songLink": item.songLink,
-                            "originalLink": item.originalLink
                         })
                     }
                 }
                 else {
                     return ({
-                        "key": item.key,
+                        ...item,
                         "iconClass": "button primary color2 circle icon solid fa-play-circle",
-                        "songTitle": item.songTitle,
-                        "songDesc": item.songDesc,
-                        "songLink": item.songLink,
-                        "originalLink": item.originalLink
                     })
                 }
             })
@@ -115,12 +85,8 @@ class Music extends Component {
                 let newStateList = []
                 newStateList = prevState.list.map((item) => {
                     return ({
-                        "key": item.key,
+                        ...item,
                         "iconClass": "button primary color2 circle icon solid fa-play-circle",
-                        "songTitle": item.songTitle,
-                        "songDesc": item.songDesc,
-                        "songLink": item.songLink,
-                        "originalLink": item.originalLink
                     })
                 })
                 return {
