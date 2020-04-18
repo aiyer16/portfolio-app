@@ -1,12 +1,13 @@
 import React, { Component } from "react"
+import MusicData from "../data/Music.json"
 
 class Music extends Component {
     audio = new Audio()
 
-    constructor(props) {
-        super(props)
+    constructor() {
+        super()
 
-        const initialState = this.props.musicData.map(function (item) {
+        const initialState = MusicData.map(function (item) {
             return (
                 {
                     "key": item.index,
@@ -21,7 +22,9 @@ class Music extends Component {
 
         this.state = {
             list: initialState,
-            prevClickedKey: null
+            prevClickedKey: null,
+            nowPlayingDisplay: "none",
+            nowPlayingTitle: null
         }
     }
 
@@ -34,9 +37,13 @@ class Music extends Component {
         this.setState(function (prevState) {
             let newStateList = []
             let audioSrc = ""
+            let nowPlayingDisplay = "none"
+            let nowPlayingTitle = ""
+
             newStateList = prevState.list.map((item) => {
                 if (item.key === index) {
                     audioSrc = item.songLink
+                    nowPlayingTitle = item.songTitle
                     if (!isPlaying) {
                         return ({
                             // Return all properties of item using spread(...) operator (ES6 syntax)
@@ -67,6 +74,7 @@ class Music extends Component {
 
             if (!isPlaying) {
                 this.audio.play()
+                nowPlayingDisplay = "block";
             }
             else {
                 this.audio.pause()
@@ -75,10 +83,13 @@ class Music extends Component {
             //Return new state
             return {
                 list: newStateList,
-                prevClickedKey: index
+                prevClickedKey: index,
+                nowPlayingDisplay: nowPlayingDisplay,
+                nowPlayingTitle: nowPlayingTitle
             }
         }
         )
+
         this.audio.onended = () => {
             console.log(this.state);
             this.setState(function (prevState) {
@@ -89,12 +100,27 @@ class Music extends Component {
                         "iconClass": "button primary color2 circle icon solid fa-play-circle",
                     })
                 })
+
+                //Return new state
                 return {
                     list: newStateList,
-                    prevClickedKey: index
+                    prevClickedKey: index,
+                    nowPlayingDisplay: "none",
+                    nowPlayingTitle: ""
                 }
             })
         };
+    }
+
+    handleClose = () => {
+        this.setState((prevState) => {
+            return ({
+                list: prevState.list,
+                prevClickedKey: prevState.prevClickedKey,
+                nowPlayingDisplay: false,
+                nowPlayingTitle: ""
+            })
+        })
     }
 
     render() {
@@ -144,6 +170,14 @@ class Music extends Component {
                                     })}
                                 </tbody>
                             </table>
+                        </div>
+                        <div className="now-playing" style={{ display: this.state.nowPlayingDisplay }}>
+                            <div className="now-playing-content">
+                                <span className="close" onClick={this.handleClose}>×</span>
+                                <div className="now-playing-body">
+                                    <p><b>Now playing: {this.state.nowPlayingTitle}</b></p>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>

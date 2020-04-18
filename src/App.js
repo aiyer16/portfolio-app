@@ -7,15 +7,13 @@ import Contact from './components/Contact'
 import Gallery from './components/Gallery'
 import Music from './components/Music'
 
-import MusicData from './data/Music.json'
-
 function App() {
   return (
     <div id="page-wrapper">
       <div id="wrapper">
         <Home />
         <About />
-        <Music musicData={MusicData} />
+        <Music />
         <Gallery />
         <Contact />
         {/* Copyright */}
