@@ -138,11 +138,12 @@ class Music extends Component {
                     <div className="span-2">
                         <h2 className="major">Music</h2>
                         <p style={{ textAlign: "justify" }}>
-                            I've been making music as a hobby for over 10 years now. When I first started, I was more focused on music composition and making melodies but over time I shifted towards learning more about the music production process.
-                            
+                            I've been making music as a hobby for over 10 years now. When I first started, I was more focused on music composition and making melodies but
+                            over time I shifted towards learning more about the music production process.
+                        </p>
+                        <p style={{ textAlign: "justify" }}>
                             I am a self-taught keyboard player with a background in Indian classical
                             music. My musical style falls under the pop genre and is heavily influenced by Tamil and Hindi film music, something I grew up listening to.
-                            
                             Lastly, for all the geeks out there, my DAW of choice is Propellerhead Reason. :)
                         </p>
                     </div>
