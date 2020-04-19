@@ -24,7 +24,8 @@ class Music extends Component {
             list: initialState,
             prevClickedKey: null,
             nowPlayingDisplay: "none",
-            nowPlayingTitle: null
+            nowPlayingTitle: null,
+            isPlaying: false
         }
     }
 
@@ -74,7 +75,7 @@ class Music extends Component {
 
             if (!isPlaying) {
                 this.audio.play()
-                nowPlayingDisplay = "block";
+                nowPlayingDisplay = "block"
             }
             else {
                 this.audio.pause()
@@ -85,7 +86,8 @@ class Music extends Component {
                 list: newStateList,
                 prevClickedKey: index,
                 nowPlayingDisplay: nowPlayingDisplay,
-                nowPlayingTitle: nowPlayingTitle
+                nowPlayingTitle: nowPlayingTitle,
+                isPlaying: !prevState.isPlaying
             }
         }
         )
@@ -106,34 +108,41 @@ class Music extends Component {
                     list: newStateList,
                     prevClickedKey: index,
                     nowPlayingDisplay: "none",
-                    nowPlayingTitle: ""
+                    nowPlayingTitle: "",
+                    isPlaying: !prevState.isPlaying
                 }
             })
         };
     }
 
-    handleClose = () => {
-        this.setState((prevState) => {
-            return ({
-                list: prevState.list,
-                prevClickedKey: prevState.prevClickedKey,
-                nowPlayingDisplay: false,
-                nowPlayingTitle: ""
-            })
-        })
-    }
-
     render() {
+        const buttonStyleAnimated = {
+            verticalAlign: "middle",
+            webkitAnimation: "heartbeat 1.5s ease-in-out 1s infinite alternate-reverse both",
+            animation: "heartbeat 1.5s ease-in-out 1s infinite alternate-reverse both"
+        }
+
+        const buttonStyle = {
+            verticalAlign: "middle",
+        }
+
+        const songDetailsStyle = {
+            verticalAlign: "middle", textAlign: "start", fontSize: "17px"
+        }
+
+        const justifyTextSyle = { textAlign: "justify" }
+
+
         return (
-            <section className="panel color1">
+            <section className="panel color1" >
                 <div className="inner columns divided">
                     <div className="span-2">
                         <h2 className="major">Music</h2>
-                        <p style={{ textAlign: "justify" }}>
+                        <p style={justifyTextSyle}>
                             I've been making music as a hobby for over 10 years now. When I first started, I was more focused on music composition and making melodies but
                             over time I shifted towards learning more about the music production process.
                         </p>
-                        <p style={{ textAlign: "justify" }}>
+                        <p style={justifyTextSyle}>
                             I am a self-taught keyboard player with a background in Indian classical
                             music. My musical style falls under the pop genre and is heavily influenced by Tamil and Hindi film music, something I grew up listening to.
                             Lastly, for all the geeks out there, my DAW of choice is Propellerhead Reason. :)
@@ -151,18 +160,18 @@ class Music extends Component {
                                                     {/*Use arrow function when passing to onClick to prevent binding issues*/}
                                                     <button
                                                         className={item.iconClass}
-                                                        style={{ verticalAlign: "middle" }}
+                                                        style={this.state.isPlaying ? buttonStyle : buttonStyleAnimated}
                                                         onClick={() => this.handlePlayClick(item.key)}>
                                                     </button>
                                                 </td>
                                                 <td
-                                                    style={{ verticalAlign: "middle", textAlign: "start", fontSize: "17px" }}>
+                                                    style={songDetailsStyle} >
                                                     <span><b>{item.songTitle}</b></span>
                                                     <br />
                                                     <span style={{ fontSize: "12px" }}>{item.songDesc}</span>
                                                 </td>
                                                 <td
-                                                    style={{ verticalAlign: "middle", textAlign: "start", fontSize: "17px" }}>
+                                                    style={songDetailsStyle}>
                                                     <span><a href={item.originalLink} target="_blank" rel="noopener noreferrer">Listen to the original</a></span>
                                                 </td>
                                             </tr>
@@ -173,7 +182,6 @@ class Music extends Component {
                         </div>
                         <div className="now-playing" style={{ display: this.state.nowPlayingDisplay }}>
                             <div className="now-playing-content">
-                                <span className="close" onClick={this.handleClose}>×</span>
                                 <div className="now-playing-body">
                                     <p><b>Now playing: {this.state.nowPlayingTitle}</b></p>
                                 </div>
