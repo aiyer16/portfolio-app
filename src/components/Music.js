@@ -175,7 +175,7 @@ class Music extends Component {
                     <div className="span-2">
                         <h2 className="major">Music</h2>
                         <p style={justifyTextSyle}>
-                            I've been making music as a hobby for over 10 years now. When I first started, I was more focused on music composition and making melodies but
+                            I've been making music as a hobby for over 10 years now. When I first started, I was more focused on making melodies but
                             over time I shifted towards learning more about the music production process.
                         </p>
                         <p style={justifyTextSyle}>

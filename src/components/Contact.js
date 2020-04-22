@@ -5,7 +5,7 @@ class Contact extends Component {
         return (
             <section className="panel color4-alt">
                 <div className="inner columns divided">
-                    <div className="span-1-5">
+                    <div className="span-1-6">
                         <ul className="contact-icons color1">
                             <li className="icon brands fa-linkedin">
                                 <a href="https://www.linkedin.com/in/akshayiyer/" target="_blank" rel="noopener noreferrer">linkedin.com/in/aiyer16</a>
