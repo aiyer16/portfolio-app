@@ -3562,7 +3562,7 @@ input, select, textarea {
 		overflow: auto; /* Enable scroll if needed */
 		background-color: rgb(0,0,0); /* Fallback color */
 		background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
-		animation: FadeAnimation 1s ease-in 0.7s forwards;		
+		animation: FadeAnimation 2s ease-in 0.7s forwards;		
 	}
 	
 		/* Modal Content */
@@ -3867,172 +3867,36 @@ input, select, textarea {
 			animation-timing-function: ease-out;
 	}
 }
+
 /**
  * ----------------------------------------
- * animation text-flicker-in-glow
+ * animation focus-in-expand
  * ----------------------------------------
  */
- @-webkit-keyframes text-flicker-in-glow {
+ @-webkit-keyframes focus-in-expand {
 	0% {
-		opacity: 0;
+	  letter-spacing: -0.5em;
+	  -webkit-filter: blur(12px);
+			  filter: blur(12px);
+	  opacity: 0;
 	}
-	10% {
-		opacity: 0;
-		text-shadow: none;
-	}
-	10.1% {
-		opacity: 1;
-		text-shadow: none;
-	}
-	10.2% {
-		opacity: 0;
-		text-shadow: none;
-	}
-	10.4% {
-		opacity: 1;
-		text-shadow: none;
-	}
-	10.6% {
-		opacity: 0;
-		text-shadow: none;
-	}
-	11% {
-		opacity: 1;
-		text-shadow: none;
-	}	
-	12% {
-		opacity: 0;
-		text-shadow: none;
-	}		
-	13% {
-		opacity: 1;
-		text-shadow: none;
-	}		
-	15% {
-		opacity: 0;
-		text-shadow: none;
-	}
-	15.1% {
-		opacity: 1;
-		text-shadow: 0 0 30px rgba(255, 255, 255, 0.25);
-	}
-	15.6% {
-		opacity: 0;
-		text-shadow: none;
-	}
-	20% {
-		opacity: 0;
-		text-shadow: none;
-	}
-	20.1% {
-		opacity: 1;
-		text-shadow: 0 0 30px rgba(255, 255, 255, 0.45), 0 0 60px rgba(255, 255, 255, 0.25);
-	}
-	20.5% {
-		opacity: 1;
-		text-shadow: 0 0 30px rgba(255, 255, 255, 0.45), 0 0 60px rgba(255, 255, 255, 0.25);
-	}
-	20.6% {
-		opacity: 0;
-		text-shadow: none;
-	}
-	35% {
-		opacity: 1;
-		text-shadow: none;
-	}
-	35.1% {
-		opacity: 1;
-		text-shadow: 0 0 30px rgba(255, 255, 255, 0.45), 0 0 60px rgba(255, 255, 255, 0.25);
-	}
-	40% {
-		opacity: 1;
-		text-shadow: 0 0 30px rgba(255, 255, 255, 0.45), 0 0 60px rgba(255, 255, 255, 0.25);
-	}
-
 	100% {
-		opacity: 1;
-		text-shadow: none;
+	  -webkit-filter: blur(0px);
+			  filter: blur(0px);
+	  opacity: 1;
 	}
-}
-  @keyframes text-flicker-in-glow {
+  }
+  @keyframes focus-in-expand {
 	0% {
+	  letter-spacing: -0.5em;
+	  -webkit-filter: blur(12px);
+			  filter: blur(12px);
 	  opacity: 0;
 	}
-	10% {
-	  opacity: 0;
-	  text-shadow: none;
-	}
-	10.1% {
-	  opacity: 1;
-	  text-shadow: none;
-	}
-	10.2% {
-	  opacity: 0;
-	  text-shadow: none;
-	}
-	10.4% {
-		opacity: 1;
-		text-shadow: none;
-	}
-	10.6% {
-		opacity: 0;
-		text-shadow: none;
-	}
-	11% {
-		opacity: 1;
-		text-shadow: none;
-	}	
-	12% {
-		opacity: 0;
-		text-shadow: none;
-	}		
-	13% {
-		opacity: 1;
-		text-shadow: none;
-	}		
-	15% {
-	  opacity: 0;
-	  text-shadow: none;
-	}
-	15.1% {
-	  opacity: 1;
-	  text-shadow: 0 0 30px rgba(255, 255, 255, 0.25);
-	}
-	15.6% {
-	  opacity: 0;
-	  text-shadow: none;
-	}
-	20% {
-	  opacity: 0;
-	  text-shadow: none;
-	}
-	20.1% {
-	  opacity: 1;
-	  text-shadow: 0 0 30px rgba(255, 255, 255, 0.45), 0 0 60px rgba(255, 255, 255, 0.25);
-	}
-	20.5% {
-	  opacity: 1;
-	  text-shadow: 0 0 30px rgba(255, 255, 255, 0.45), 0 0 60px rgba(255, 255, 255, 0.25);
-	}
-	20.6% {
-	  opacity: 0;
-	  text-shadow: none;
-	}
-	35% {
-	  opacity: 1;
-	  text-shadow: none;
-	}
-	35.1% {
-	  opacity: 1;
-	  text-shadow: 0 0 30px rgba(255, 255, 255, 0.45), 0 0 60px rgba(255, 255, 255, 0.25);
-	}
-	40% {
-	  opacity: 1;
-	  text-shadow: 0 0 30px rgba(255, 255, 255, 0.45), 0 0 60px rgba(255, 255, 255, 0.25);
-	}
-
 	100% {
+	  -webkit-filter: blur(0px);
+			  filter: blur(0px);
 	  opacity: 1;
-	  text-shadow: none;
 	}
-}	
+  }
+  

@@ -35,30 +35,22 @@ class Music extends Component {
 
         var isPlaying = this.audio.currentTime > 0 && !this.audio.paused && !this.audio.ended && this.audio.readyState > 2;
 
-        this.setState(function (prevState) {
-            let newStateList = []
-            let audioSrc = ""
-            let nowPlayingDisplay = "none"
-            let nowPlayingTitle = ""
+        let newStateList = []
+        let audioSrc = ""
+        let nowPlayingDisplay = "none"
+        let nowPlayingTitle = ""
 
-            newStateList = prevState.list.map((item) => {
-                if (item.key === index) {
-                    audioSrc = item.songLink
-                    nowPlayingTitle = item.songTitle
-                    if (!isPlaying) {
-                        return ({
-                            // Return all properties of item using spread(...) operator (ES6 syntax)
-                            ...item,
-                            // Override icon class property
-                            "iconClass": "button color2 circle icon solid fa-pause-circle",
-                        })
-                    }
-                    else {
-                        return ({
-                            ...item,
-                            "iconClass": "button primary color2 circle icon solid fa-play-circle",
-                        })
-                    }
+        newStateList = this.state.list.map((item) => {
+            if (item.key === index) {
+                audioSrc = item.songLink
+                nowPlayingTitle = item.songTitle
+                if (!isPlaying) {
+                    return ({
+                        // Return all properties of item using spread(...) operator (ES6 syntax)
+                        ...item,
+                        // Override icon class property
+                        "iconClass": "button color2 circle icon solid fa-pause-circle",
+                    })
                 }
                 else {
                     return ({
@@ -66,34 +58,52 @@ class Music extends Component {
                         "iconClass": "button primary color2 circle icon solid fa-play-circle",
                     })
                 }
-            })
-
-            if (this.audio.currentSrc == null || prevState.prevClickedKey !== index) {
-                this.audio.src = audioSrc
-                this.audio.load()
-            }
-
-            if (!isPlaying) {
-                this.audio.play()
-                nowPlayingDisplay = "block"
             }
             else {
-                this.audio.pause()
+                return ({
+                    ...item,
+                    "iconClass": "button primary color2 circle icon solid fa-play-circle",
+                })
             }
+        })
 
-            //Return new state
-            return {
-                list: newStateList,
-                prevClickedKey: index,
-                nowPlayingDisplay: nowPlayingDisplay,
-                nowPlayingTitle: nowPlayingTitle,
-                isPlaying: !prevState.isPlaying
-            }
+        if (this.audio.currentSrc == null || this.state.prevClickedKey !== index) {
+            this.audio.src = audioSrc
+            this.audio.load()
         }
-        )
+
+        if (!isPlaying) {
+            var playPromise = this.audio.play()
+
+            playPromise
+                .then(() => {
+                    nowPlayingDisplay = "block"
+                    this.setState(function (prevState) {
+                        return {
+                            list: newStateList,
+                            prevClickedKey: index,
+                            nowPlayingDisplay: nowPlayingDisplay,
+                            nowPlayingTitle: nowPlayingTitle,
+                            isPlaying: !prevState.isPlaying
+                        }
+                    })
+                })
+
+        }
+        else {
+            this.audio.pause()
+            this.setState(function (prevState) {
+                return {
+                    list: newStateList,
+                    prevClickedKey: index,
+                    nowPlayingDisplay: nowPlayingDisplay,
+                    nowPlayingTitle: nowPlayingTitle,
+                    isPlaying: !prevState.isPlaying
+                }
+            })
+        }
 
         this.audio.onended = () => {
-            console.log(this.state);
             this.setState(function (prevState) {
                 let newStateList = []
                 newStateList = prevState.list.map((item) => {
@@ -118,7 +128,7 @@ class Music extends Component {
     render() {
         const buttonStyleAnimated = {
             verticalAlign: "middle",
-            webkitAnimation: "heartbeat 1.5s ease-in-out 1s infinite alternate-reverse both",
+            WebkitAnimation: "heartbeat 1.5s ease-in-out 1s infinite alternate-reverse both",
             animation: "heartbeat 1.5s ease-in-out 1s infinite alternate-reverse both"
         }
 
@@ -132,6 +142,32 @@ class Music extends Component {
 
         const justifyTextSyle = { textAlign: "justify" }
 
+        const tableRows = (
+            this.state.list.map((item) => {
+                return (
+                    <tr key={item.key}>
+                        <td>
+                            {/*Use arrow function when passing to onClick to prevent binding issues*/}
+                            <button
+                                className={item.iconClass}
+                                style={this.state.isPlaying ? buttonStyle : buttonStyleAnimated}
+                                onClick={() => this.handlePlayClick(item.key)}>
+                            </button>
+                        </td>
+                        <td
+                            style={songDetailsStyle} >
+                            <span><b>{item.songTitle}</b></span>
+                            <br />
+                            <span style={{ fontSize: "12px" }}>{item.songDesc}</span>
+                        </td>
+                        <td
+                            style={songDetailsStyle}>
+                            <span><a href={item.originalLink} target="_blank" rel="noopener noreferrer">Listen to the original</a></span>
+                        </td>
+                    </tr>
+                )
+            })
+        )
 
         return (
             <section className="panel color1" >
@@ -153,30 +189,7 @@ class Music extends Component {
                         <div className="table-wrapper">
                             <table>
                                 <tbody>
-                                    {this.state.list.map((item) => {
-                                        return (
-                                            <tr key={item.key}>
-                                                <td>
-                                                    {/*Use arrow function when passing to onClick to prevent binding issues*/}
-                                                    <button
-                                                        className={item.iconClass}
-                                                        style={this.state.isPlaying ? buttonStyle : buttonStyleAnimated}
-                                                        onClick={() => this.handlePlayClick(item.key)}>
-                                                    </button>
-                                                </td>
-                                                <td
-                                                    style={songDetailsStyle} >
-                                                    <span><b>{item.songTitle}</b></span>
-                                                    <br />
-                                                    <span style={{ fontSize: "12px" }}>{item.songDesc}</span>
-                                                </td>
-                                                <td
-                                                    style={songDetailsStyle}>
-                                                    <span><a href={item.originalLink} target="_blank" rel="noopener noreferrer">Listen to the original</a></span>
-                                                </td>
-                                            </tr>
-                                        )
-                                    })}
+                                    {tableRows}
                                 </tbody>
                             </table>
                         </div>
