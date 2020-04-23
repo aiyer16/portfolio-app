@@ -169,6 +169,25 @@ class Music extends Component {
             })
         )
 
+        const tableDiv = (
+            <div className="table-wrapper">
+                <table>
+                    <tbody>
+                        {tableRows}
+                    </tbody>
+                </table>
+            </div>
+        )
+
+        const nowPlayingDiv = (
+            <div className="now-playing" style={{ display: this.state.nowPlayingDisplay }}>
+                <div className="now-playing-content">
+                    <div className="now-playing-body">
+                        <p><b>Now playing: {this.state.nowPlayingTitle}</b></p>
+                    </div>
+                </div>
+            </div>)
+
         return (
             <section className="panel color1" >
                 <div className="inner columns divided">
@@ -186,20 +205,8 @@ class Music extends Component {
                     </div>
                     <div className="span-4">
                         <h3 className="major">Listen to some of my tunes!</h3>
-                        <div className="table-wrapper">
-                            <table>
-                                <tbody>
-                                    {tableRows}
-                                </tbody>
-                            </table>
-                        </div>
-                        <div className="now-playing" style={{ display: this.state.nowPlayingDisplay }}>
-                            <div className="now-playing-content">
-                                <div className="now-playing-body">
-                                    <p><b>Now playing: {this.state.nowPlayingTitle}</b></p>
-                                </div>
-                            </div>
-                        </div>
+                        {tableDiv}
+                        {this.state.nowPlayingDisplay === "block" ? nowPlayingDiv : ""}
                     </div>
                 </div>
             </section>
