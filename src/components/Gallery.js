@@ -3,7 +3,7 @@ import React from "react"
 function Gallery() {
     return (
         < section className="panel" >
-            <div className="intro color2">
+            <div className="intro color4">
                 <h2 className="major">Photography</h2>
                 <p style={{ textAlign: "justify" }}>Here are some of my favorite pictures from my travels around the world. My preferred equipment includes an Olympus OMD EM-5 mirror-less camera
                 and with the 25mm Panasonic Lumix G prime lens (50mm equivalent). I use Affinity Photo for all my editing.

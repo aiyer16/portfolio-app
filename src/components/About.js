@@ -4,7 +4,7 @@ function About() {
     return (
         <section className="panel spotlight medium center" id="first" >
             <div className="content span-7">
-                <h3 className="major">About Me</h3>
+                <h2 className="major">About Me</h2>
                 <p style={{ textAlign: "justify" }}> I am a <b>Data Engineer </b>who loves solving complex problems
                     and believes in the power of data-driven decision making and analytics to help drive ideas forward. I am currently working on furthering <b>ETL</b> capabilities
                     within <b>Mastercard's Data and Services </b>organization to fuel a growing suite of SaaS analytics solutions.

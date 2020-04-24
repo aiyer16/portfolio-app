@@ -204,7 +204,7 @@ class Music extends Component {
                         </p>
                     </div>
                     <div className="span-4">
-                        <h3 className="major">Listen to some of my tunes!</h3>
+                        <h3>Listen to some of my tunes!</h3>
                         {tableDiv}
                         {this.state.nowPlayingDisplay === "block" ? nowPlayingDiv : ""}
                     </div>

@@ -6,6 +6,7 @@ import Home from './components/Home'
 import Contact from './components/Contact'
 import Gallery from './components/Gallery'
 import Music from './components/Music'
+import Work from './components/Work'
 
 function App() {
   return (
@@ -13,6 +14,7 @@ function App() {
       <div id="wrapper">
         <Home />
         <About />
+        <Work />
         <Music />
         <Gallery />
         <Contact />

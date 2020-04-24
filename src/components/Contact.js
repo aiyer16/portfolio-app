@@ -2,7 +2,7 @@ import React from "react"
 
 function Contact() {
     return (
-        <section className="panel color4-alt">
+        <section className="panel color4">
             <div className="inner columns divided">
                 <div className="span-1-6">
                     <ul className="contact-icons color1">
